@@ -1,0 +1,20 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+
+<div class="text-center" style="margin-top: 20px;">
+    <img src="/img/сбис.png" alt="">
+</div>
+
+<div class="text-center" style="margin-top: 20px;">
+    <form enctype="multipart/form-data" method="POST">
+        <button type="submit" class="btn btn-primary">Запустить обработку</button>
+    </form>
+</div>
+
+{% if message %}
+<h6>{{ message }}</h6>
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "__layout.twig" %}
+
+{% block content %}
+{% for count in countdoc %}
+<h6>Всего документов: {{ count.count }}</h6>
+{% endfor %}
+<form class="row g-3" action="">
+
+    <div class="col-md-2">
+        <label for="inputTitle" class="form-label">Дата</label>
+        <input type="date" class="form-control" id="inputTitle" name="date">
+    </div>
+
+    <div class="col-md-3">
+        <label for="inputTitle" class="form-label">Номер</label>
+        <input type="text" class="form-control" id="inputTitle" name="number">
+    </div>
+
+    <div class="col-md-2">
+        <label for="inputState" class="form-label">Тип</label>
+        <select id="inputState" class="form-select" name="type">
+            <option value="">Все</option>
+            {% for type in types %}
+            <option value="{{ type.type }}">{{ type.type }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label for="inputState" class="form-label">Направление</label>
+        <select id="inputState" class="form-select" name="direction">
+            <option value="">Все</option>
+            {% for direction in directions %}
+            <option value="{{ direction.direction }}">{{ direction.direction }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-3" style="padding-top: 31px; padding-left: 10px;">
+        <button type="submit" class="btn btn-primary">Найти</button>
+    </div>
+
+</form>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Дата</th>
+        <th scope="col">Номер</th>
+        <th scope="col">Тип</th>
+        <th scope="col">Направление</th>
+        <th scope="col">PDF</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for document in documents %}
+      <tr>
+        <td>{{ document.date }}</td>
+        <td>{{ document.number }}</td>
+        <td>{{ document.type }}</td>
+        <td>{{ document.direction }}</td>
+        <td>
+            <form action="/base/{{ document.direction }}/{{ document.doc }}" target="_blank">
+            <button class="btn btn-info">Ссылка</button>
+            </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
